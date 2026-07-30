@@ -64,6 +64,62 @@ themeBtn.addEventListener("click", function () {
 }
 })
 
+/* 5. Random Color Generator */
+const colorBox = document.getElementById("colorBox");
+const colorCode = document.getElementById("colorCode");
+const generateBtn = document.getElementById("generateBtn");
+
+generateBtn.addEventListener("click", function () {
+    let red = Math.floor(Math.random() * 256);
+    let green = Math.floor(Math.random() * 256);
+    let blue = Math.floor(Math.random() * 256);
+
+    let color = `rgb(${red}, ${green}, ${blue})`;
+    colorBox.style.backgroundColor = color;
+    colorCode.innerText = color;
+})
+
+/* 6. Age Calculator */
+
+const birthDate = document.getElementById("birthDate");
+birthDate.max = new Date().toISOString().split("T")[0];
+console.log(birthDate.max)
+const calculateBtn = document.getElementById("calculateBtn");
+const ageResult = document.getElementById("ageResult");
+
+calculateBtn.addEventListener("click", function () {
+   
+    let birth = new Date(birthDate.value);
+   let birthyear = birth.getFullYear();
+   let birthmonth = birth.getMonth();
+   let birthday = birth.getDate();
+
+   let  today = new Date();
+   today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+   let currentyear = today.getFullYear();
+   let currentmonth = today.getMonth();
+   let currentdate = today.getDate();
+
+   let x = currentyear - birthyear ;
+   let y = currentmonth - birthmonth ;
+   let z = currentdate - birthday;
+
+   if (birth > today) {
+    ageResult.innerText = "Future date is not allowed!";
+    return;
+}
+   if (z < 0) {
+    let prevmonth = new Date(currentyear, currentmonth, 0).getDate()
+    z = z + prevmonth
+    y--;
+   } if (y < 0){
+    y = y + 12;
+    x--;
+   }
+    ageResult.innerText = 
+    (`You are ${x} year ${y} month and ${z} days Old`)
+})
+
 
 
 /* x. Number Guessing Game */
